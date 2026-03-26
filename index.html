@@ -1,0 +1,175 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>GSAP Globe with Surface Lines</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    .hidden { display: none; }
+    /* Use a dark space color for the background to blend with the scene background */
+    body { margin: 0; overflow: hidden; background-color: #000000; } 
+    canvas { display: block; }
+    .half_container { width: 100%; height: 100%; }
+  </style>
+</head>
+<body>
+  <div id="main">
+    <div id="demo" class="full_container w-full h-screen flex">
+      <div class="globeCon half_container w-full "></div>
+    </div>
+  </div>
+
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/build/three.min.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/three@0.132.2/examples/js/controls/OrbitControls.js"></script>
+  <script src="https://cdn.jsdelivr.net/npm/gsap@3.12.5/dist/gsap.min.js"></script>
+
+  <script>
+    const globeCon = document.querySelector('.globeCon');
+    const scene = new THREE.Scene();
+    const camera = new THREE.PerspectiveCamera(75, 1, 0.1, 1000);
+    const renderer = new THREE.WebGLRenderer({ antialias: true });
+    globeCon.appendChild(renderer.domElement);
+    
+    const textureLoader = new THREE.TextureLoader();
+    const backgroundTexture = textureLoader.load(
+        'space.jpg',
+        () => {
+            scene.background = backgroundTexture;
+        },
+        undefined,
+        (err) => {
+            console.error('Error loading background texture:', err);
+
+            scene.background = new THREE.Color(0x000000); 
+        }
+    );
+    // =========================================================
+
+    // ====make the globe====
+    const radius = 5;
+    const globeTexture = textureLoader.load('map1.jpg'); 
+    const globe = new THREE.Mesh(
+      new THREE.SphereGeometry(radius, 64, 64),
+      new THREE.MeshBasicMaterial({ map: globeTexture })
+    );
+    scene.add(globe);
+
+    // ====control======= 
+    camera.position.z = 15;
+    const controls = new THREE.OrbitControls(camera, renderer.domElement);
+    controls.enableDamping = true;
+    controls.dampingFactor = 0.05;
+
+    function resizeRenderer() {
+      const { width, height } = globeCon.getBoundingClientRect();
+      renderer.setSize(width, height);
+      camera.aspect = width / height;
+      camera.updateProjectionMatrix();
+    }
+
+    function latLongToVector3(lat, lon, r) {
+      const phi = (90 - lat) * (Math.PI / 180);
+      const theta = (lon + 180) * (Math.PI / 180);
+      return new THREE.Vector3(
+        -r * Math.sin(phi) * Math.cos(theta),
+        r * Math.cos(phi),
+        r * Math.sin(phi) * Math.sin(theta)
+      );
+    }
+
+    const points = [
+      { lat: 37.7749, lon: -122.4194, color: 0xff0000 },
+      { lat: 51.5074, lon: -0.1278, color: 0x00ffff },
+      { lat: 35.6895, lon: 139.6917, color: 0xffff00 },
+      { lat: 28.6139, lon: 77.2090, color: 0x00ff00 },
+      { lat: -33.8688, lon: 151.2093, color: 0xff00ff },
+      { lat: 40.7128, lon: -74.006, color: 0xffffff },
+    ];
+
+    const lightMeshes = [];
+
+    // Create blinking lights
+    points.forEach((p, i) => {
+      const geom = new THREE.SphereGeometry(0.02, 30, 30);
+      const mat = new THREE.MeshBasicMaterial({ color: p.color, transparent: true, opacity: 1 });
+      const mesh = new THREE.Mesh(geom, mat);
+      const pos = latLongToVector3(p.lat, p.lon, radius + 0.1);
+      mesh.position.copy(pos);
+      globe.add(mesh);
+      lightMeshes.push({ mesh, mat });
+
+      // GSAP blinking
+      gsap.to(mat, {
+        opacity: 0.2,
+        duration: 1 + Math.random(),
+        repeat: -1,
+        yoyo: true,
+        ease: "sine.inOut",
+        delay: i * 0.3
+      });
+    });
+
+    // Connect lights with arcs that stay over the surface
+    lightMeshes.forEach((startObj, i) => {
+      for (let j = i + 1; j < lightMeshes.length; j++) {
+        const start = startObj.mesh.position.clone().normalize();
+        const end = lightMeshes[j].mesh.position.clone().normalize();
+
+        const mid = start.clone().add(end).normalize();
+        const distance = start.angleTo(end) + 0.1;
+        const arcHeight = radius * (1.6 + distance * 0.02);
+        const control = mid.clone().multiplyScalar(arcHeight);
+
+        // Define curve in 3D space
+        const curve = new THREE.QuadraticBezierCurve3(
+          start.clone().multiplyScalar(radius + 0.01),
+          control,
+          end.clone().multiplyScalar(radius + 0.01)
+        );
+
+        const curvePoints = curve.getPoints(100);
+        const geometry = new THREE.BufferGeometry().setFromPoints(curvePoints);
+
+        const material = new THREE.LineBasicMaterial({
+          color: new THREE.Color(Math.random(), Math.random(), Math.random()),
+          transparent: true,
+          opacity: 0.1
+        });
+
+        const line = new THREE.Line(geometry, material);
+        globe.add(line);
+
+        // GSAP line glow animation
+        gsap.to(material, {
+          opacity: 0.7,
+          duration: 2,
+          repeat: -1,
+          yoyo: true,
+          ease: "power1.inOut",
+          delay: Math.random() * 9
+        });
+      }
+    });
+
+    resizeRenderer();
+    window.addEventListener('resize', resizeRenderer);
+
+    // Smooth globe rotation
+    gsap.to(globe.rotation, {
+      y: Math.PI * 2,
+      duration: 60,
+      ease: "none",
+      repeat: -1
+    });
+
+    function animate() {
+      requestAnimationFrame(animate);
+      controls.update();
+      renderer.render(scene, camera);
+    }
+    animate();
+  </script>
+</body>
+</html>
