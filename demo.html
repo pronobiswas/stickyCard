@@ -37,7 +37,7 @@
             width: 100%;
             min-height: 500px;
             padding: 10px;
-            color: white;
+            color: rgb(0, 0, 0);
             position: relative;
         }
 
@@ -45,21 +45,22 @@
             width: 100%;
             min-width: 300px;
             max-width: 600px;
-            height: 100%;
-            min-height: 320px;
-            max-height: 450px;
-            background-color: red;
+            height: auto;
+            min-height: 545px;
+            background-color: #F7F0EA;
             position: absolute;
             top: 50%;
             left: 50%;
             transform: translate(-50%, -50%);
             border-radius: 10px;
+            border: 2px solid #CCD627;
+            border-top: none;
         }
 
         .cardHeader {
             width: 100%;
-            background-color: #c2904e;
-            padding: 12px 12px 12px 12px !important;
+            background-color: #CCD627;
+            padding: 12px 20px 12px 12px !important;
             position: relative;
             border-radius: 10px 10px 0 0;
         }
@@ -67,11 +68,11 @@
         .cardHeader ::after {
             content: "";
             position: absolute;
-            top: -50%;
+            top: -27px;
             left: 8%;
             width: 200px;
             height: 30px;
-            background-color: #c2904e;
+            background-color: #CCD627;
             clip-path: polygon(85% 0%, 100% 100%, 0% 100%, 15% 0%);
         }
 
@@ -80,27 +81,21 @@
             font-size: 1.8rem;
             font-weight: 600;
             text-align: right;
+            color: white;
         }
 
-        .card:nth-child(1) {
-            background-color: rebeccapurple;
-        }
-
-        .card:nth-child(3) {
-            background-color: rebeccapurple;
-        }
 
         .cardContent {
             width: 100%;
-            height: 100%;
-            padding: 50px !important;
+            height: max-content;
+            padding: 6% !important;
         }
 
         .cardContent .cardTitle {
-            font-size: 2.8rem;
-            font-weight: 400;
+            font-size: 1.8rem;
+            font-weight: 600;
             line-height: 1em;
-            margin: 10px 0 30px 0 !important;
+            margin: 10px 0 20px 0 !important;
         }
 
         .cardContent p {
@@ -109,7 +104,22 @@
 
         .cardContent .CardList {
             margin: 30px 0 0 0 !important;
+            list-style-type: none;
+            display: flex;
+            flex-direction: column;
+            gap: 8px;
         }
+
+        .cardContent .CardListItem {
+            display: flex;
+            gap: 10px;
+        }
+
+        .cardContent .CardListItem svg {
+            flex-shrink: 0;
+            flex-grow: 0;
+        }
+
 
         .cardSignuture {
             width: 100%;
@@ -117,8 +127,72 @@
             display: flex;
             align-items: center;
             justify-content: flex-end;
-            color: #c2904e;
+            padding-top: 20px !important;
+
         }
+
+        .cardSignuture button {
+            margin: 0;
+            padding: 10px 22px !important;
+            font-size: 16px;
+            border: 1px solid #CCD627;
+            color: white;
+            background-color: #CCD627;
+            cursor: pointer;
+        }
+
+        .cardContent .CardListItem svg path {
+            fill: #CCD627;
+        }
+
+        .card:nth-child(2) .cardContent .CardListItem svg path {
+            fill: #7BA6BC;
+        }
+
+        .card:nth-child(3) .cardContent .CardListItem svg path {
+            fill: #7F92CC;
+        }
+
+        .card:nth-child(2) {
+            border-color: #7BA6BC;
+        }
+
+        .card:nth-child(2) .cardHeader {
+            background-color: #7BA6BC;
+        }
+
+        .card:nth-child(2) .cardHeader :after {
+            background-color: #7BA6BC;
+        }
+
+        .card:nth-child(3) .cardSignuture button {
+            border: 1px solid #7BA6BC;
+            background-color: #7BA6BC;
+        }
+
+        .card:nth-child(3) {
+            border-color: #7F92CC;
+        }
+
+        .card:nth-child(3) .cardHeader {
+            background-color: #7F92CC;
+        }
+
+        .card:nth-child(3) .cardHeader :after {
+            background-color: #7F92CC;
+        }
+
+        .card:nth-child(3) .cardContent .cardTitle {
+            color: #7F92CC;
+        }
+
+        .card:nth-child(3) .cardSignuture button {
+            border: 1px solid #7F92CC;
+            background-color: #7F92CC;
+        }
+
+
+
 
         #myModal {
             width: 100%;
@@ -132,24 +206,58 @@
             align-items: center;
             justify-content: center;
         }
-        .modalCard{
+
+        .modalCard {
             width: 100%;
             max-width: 600px;
             height: 80vh;
             background-color: rgba(0, 0, 0, 0.445);
             /* padding: 5%; */
         }
-        .modalCard .modalHeading{
+
+        .modalCard .modalHeading {
             font-size: 2rem;
             margin: 0;
             padding: 8px;
             background-color: #c2904e;
         }
-        .modalCard{}
+
+        .modalCard {}
+
+        @media screen and (max-width:576px) {
+
+
+            .cardHeader h5 {
+                font-family: "sans-serif";
+                font-size: 1.6rem;
+                font-weight: 600;
+                text-align: right;
+            }
+
+            .cardContent .cardTitle {
+                font-size: 1.4rem;
+                font-weight: 600;
+                line-height: 1.2em;
+                margin: 10px 0 30px 0 !important;
+            }
+
+            .cardContent p {
+                font-size: 1.2rem;
+            }
+
+            .cardContent .CardList {
+                margin: 30px 0 0 0 !important;
+                list-style-type: none;
+                display: flex;
+                flex-direction: column;
+                gap: 8px;
+            }
+        }
     </style>
 </head>
 
 <body>
+    <div style="width:100%;height:50vh; background: gray;"></div>
     <section id="mainWrapper">
         <div class="wrapper">
 
@@ -163,12 +271,73 @@
                     <p>Starting something new can feel overwhelming, even if you’ve done business before. Common
                         struggles include:</p>
                     <ul class="CardList">
-                        <li>juggling multiple ideas, tasks, and deadlines</li>
-                        <li>uncertainty about the next step to take</li>
-                        <li>fear of missing something important</li>
-                        <li>spending time on “busy work” instead of real progress</li>
-                        <li>constantly shifting plans and changing priorities</li>
-                        <li>no clear system to organize your ideas and goals</li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>juggling multiple ideas, tasks, and deadlines</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>uncertainty about the next step to take</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>fear of missing something important</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>spending time on “busy work” instead of real progress</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>constantly shifting plans and changing priorities</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>no clear system to organize your ideas and goals</span>
+                        </li>
+
                     </ul>
                     <div class="cardSignuture">
                         <button onclick="openModal(1)">More info</button>
@@ -178,20 +347,70 @@
 
             <div class="card">
                 <div class="cardHeader">
-                    <h5>Planning to start a (new) business</h5>
+                    <h5>Solopreneur</h5>
                 </div>
                 <div class="cardContent">
 
                     <h4 class="cardTitle">The problem</h4>
-                    <p>Starting something new can feel overwhelming, even if you’ve done business before. Common
-                        struggles include:</p>
+                    <p>Running a business on your own often means:</p>
                     <ul class="CardList">
-                        <li>juggling multiple ideas, tasks, and deadlines</li>
-                        <li>uncertainty about the next step to take</li>
-                        <li>fear of missing something important</li>
-                        <li>spending time on “busy work” instead of real progress</li>
-                        <li>constantly shifting plans and changing priorities</li>
-                        <li>no clear system to organize your ideas and goals</li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>wasting time searching for information and maintaining inefficient records</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>juggling project deadlines, invoicing, payments, and both your own and your clients’
+                                obligations</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>too many alarms, reminders, and calendars, and yet still missing things</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>unclear visibility into finances and business performance</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>working in a system that isn’t sustainable long-term</span>
+                        </li>
+
                     </ul>
                     <div class="cardSignuture">
                         <button onclick="openModal(2)">More info</button>
@@ -201,69 +420,63 @@
 
             <div class="card">
                 <div class="cardHeader">
-                    <h5>Planning to start a (new) business</h5>
+                    <h5>Managing a small team (up to 5 employees)</h5>
                 </div>
                 <div class="cardContent">
 
                     <h4 class="cardTitle">The problem</h4>
-                    <p>Starting something new can feel overwhelming, even if you’ve done business before. Common
-                        struggles include:</p>
+                    <p>As a small team grows, new challenges often emerge:</p>
                     <ul class="CardList">
-                        <li>juggling multiple ideas, tasks, and deadlines</li>
-                        <li>uncertainty about the next step to take</li>
-                        <li>fear of missing something important</li>
-                        <li>spending time on “busy work” instead of real progress</li>
-                        <li>constantly shifting plans and changing priorities</li>
-                        <li>no clear system to organize your ideas and goals</li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>Important information is scattered across emails, chats, and various communication
+                                tools</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>It’s difficult to know which document version is the most up-to-date</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>Tasks and responsibilities are not always clearly defined</span>
+                        </li>
+
+                        <li class="CardListItem">
+                            <svg width="20" height="20" viewBox="0 0 20 20" fill="none"
+                                xmlns="http://www.w3.org/2000/svg">
+                                <path fill-rule="evenodd" clip-rule="evenodd"
+                                    d="M20 10C20 15.5228 15.5228 20 10 20C4.47715 20 0 15.5228 0 10C0 4.47715 4.47715 0 10 0C15.5228 0 20 4.47715 20 10ZM14.0303 6.96967C14.3232 7.26256 14.3232 7.73744 14.0303 8.0303L9.0303 13.0303C8.7374 13.3232 8.2626 13.3232 7.96967 13.0303L5.96967 11.0303C5.67678 10.7374 5.67678 10.2626 5.96967 9.9697C6.26256 9.6768 6.73744 9.6768 7.03033 9.9697L8.5 11.4393L10.7348 9.2045L12.9697 6.96967C13.2626 6.67678 13.7374 6.67678 14.0303 6.96967Z"
+                                    fill="#1C274C" />
+                            </svg>
+
+                            <span>Project communication happens across multiple channels, with status and phase often
+                                unclear</span>
+                        </li>
+
                     </ul>
                     <div class="cardSignuture">
-                        <button onclick="openModal(3)">More info</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="cardHeader">
-                    <h5>Planning to start a (new) business</h5>
-                </div>
-                <div class="cardContent">
-
-                    <h4 class="cardTitle">The problem</h4>
-                    <p>Starting something new can feel overwhelming, even if you’ve done business before. Common
-                        struggles include:</p>
-                    <ul class="CardList">
-                        <li>juggling multiple ideas, tasks, and deadlines</li>
-                        <li>uncertainty about the next step to take</li>
-                        <li>fear of missing something important</li>
-                        <li>spending time on “busy work” instead of real progress</li>
-                        <li>constantly shifting plans and changing priorities</li>
-                        <li>no clear system to organize your ideas and goals</li>
-                    </ul>
-                    <div class="cardSignuture">
-                        <button onclick="openModal(4)">More info</button>
-                    </div>
-                </div>
-            </div>
-
-            <div class="card">
-                <div class="cardHeader">
-                    <h5>Planning to start a (new) business</h5>
-                </div>
-                <div class="cardContent">
-
-                    <h4 class="cardTitle">The problem</h4>
-                    <p>Starting something new can feel overwhelming, even if you’ve done business before. Common
-                        struggles include:</p>
-                    <ul class="CardList">
-                        <li>juggling multiple ideas, tasks, and deadlines</li>
-                        <li>uncertainty about the next step to take</li>
-                        <li>fear of missing something important</li>
-                        <li>spending time on “busy work” instead of real progress</li>
-                        <li>constantly shifting plans and changing priorities</li>
-                        <li>no clear system to organize your ideas and goals</li>
-                    </ul>
-                    <div class="cardSignuture">
-                        <button onclick="openModal(5)">More info</button>
+                        <button onclick="openModal(1)">More info</button>
                     </div>
                 </div>
             </div>
@@ -271,6 +484,7 @@
         </div>
 
     </section>
+    <div style="width:100%;height:150vh; background: gray;"></div>
     <!-- <div id="myModal">
         <div class="modalCard">
             <h3 class="modalHeading">Lorem, ipsum dolor.</h3>
@@ -298,14 +512,14 @@
                     trigger: '#mainWrapper',
                     pin: true,
                     start: 'top 10%',
-                    end: '+=800',
+                    end: '+=500',
                     scrub: 1,
                     pinspaceing: true,
                 }
             });
             tl.from('.card', {
                 yPercent: 100,
-                duration: 0.5,
+                duration: 1,
                 stagger: 1,
                 zIndex: 5,
             })
@@ -501,6 +715,34 @@
 
     </script>
     <!-- ========script======== -->
+
+
+
+
+    <!-- ============================== -->
+    <!-- ============================== -->
+
+    <!-- <div class="lang-switcher">
+        <div class="lang-selected">
+            🇺🇸 <span>EN</span> ▼
+        </div>
+
+        <div class="lang-dropdown">
+            <div class="arrow-up"></div>
+
+            <div class="lang-item">
+                [gt-link lang="en" label="English" widget_look="flags_name"]
+            </div>
+
+            <div class="lang-item">
+                [gt-link lang="fr" label="Français" widget_look="flags_name"]
+            </div>
+        </div>
+    </div> -->
+    
+    <!-- ============================== -->
+    <!-- ============================== -->
+    <!-- ============================== -->
 </body>
 
 </html>
